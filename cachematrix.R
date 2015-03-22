@@ -1,7 +1,6 @@
-## Put comments here that give an overall description of what your
-## functions do
 
-## this function makes a matrix  and creates vectors
+
+## this function returns the list of functions getMatrix , getMatrix , cacheInverse ,  setInverse
 makeCacheMatrix <- function(x = numeric()) {
         
         # set m to null
@@ -25,22 +24,22 @@ makeCacheMatrix <- function(x = numeric()) {
         }
 
 
-        getInverse <- function() {
+        setInverse <- function() {
                 m
         }
         
 
-        list(setMatrix = setMatrix, getMatrix = getMatrix, cacheInverse = cacheInverse, getInverse = getInverse)
+        list(setMatrix = setMatrix, getMatrix = getMatrix, cacheInverse = cacheInverse, getInverse = setInverse)
 }
 
 
 
-## This function inverses goes in the opposite direction
+## This function is the inverse function
 
 
 cacheSolve <- function(y, ...) {
         # get the cached value
-        m <- y$getInverse()
+        m <- y$setInverse()
         # if a cached value exists return it
         if(!is.null(inverse)) {
                 message("getting cached data")
@@ -49,7 +48,7 @@ cacheSolve <- function(y, ...) {
 
         data <- y$getMatrix()
         m <- solve(data)
-        y$cacheInverse(m)
+        y$setInverse(m)
         m
 }
 
